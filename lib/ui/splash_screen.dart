@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:e_commerce/const/AppColor.dart';
+import 'package:e_commerce/ui/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -10,6 +13,14 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  void initState() {
+    Timer(
+        Duration(seconds: 3),
+        () => Navigator.push(
+            context, MaterialPageRoute(builder: (_) => LoginScreen())));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,5 +47,5 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
       ),
     );
-  }
+  } // demo project
 }
