@@ -1,5 +1,6 @@
 import 'package:e_commerce/const/AppColor.dart';
-import 'package:e_commerce/ui/HomeScreen.dart';
+import 'package:e_commerce/ui/HomePage.dart';
+
 import 'package:e_commerce/ui/registration_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -277,6 +278,4 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
-  customButton(String s, Null Function() param1) {}
 }
