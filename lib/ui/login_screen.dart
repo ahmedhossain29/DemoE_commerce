@@ -1,5 +1,5 @@
 import 'package:e_commerce/const/AppColor.dart';
-import 'package:e_commerce/ui/HomePage.dart';
+import 'package:e_commerce/ui/bottomNavScreen.dart';
 
 import 'package:e_commerce/ui/registration_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (authCredential.uid.isNotEmpty) {
         Navigator.push(
-            context, MaterialPageRoute(builder: (_) => HomeScreen()));
+            context, MaterialPageRoute(builder: (_) => BottomNavController()));
       } else {
         Fluttertoast.showToast(msg: "Something is worng");
       }

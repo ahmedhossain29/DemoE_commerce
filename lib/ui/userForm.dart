@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce/const/AppColor.dart';
+import 'package:e_commerce/ui/bottomNavScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -45,7 +46,8 @@ class _UserFormState extends State<UserForm> {
           "dob": _dobController.text,
           "gender": _genderController.text,
         })
-        .then((value) => print("user data added"))
+        .then((value) => Navigator.push(
+            context, MaterialPageRoute(builder: (_) => BottomNavController())))
         .catchError((error) => print("something is wrong. $error"));
   }
 
