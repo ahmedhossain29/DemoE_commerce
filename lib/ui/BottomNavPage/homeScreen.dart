@@ -25,9 +25,9 @@ class _HomeState extends State<Home> {
     setState(() {
       for (int i = 0; i < qn.docs.length; i++) {
         _carouselImage.add(
-          qn.docs[i]["imgpath"],
+          qn.docs[i]["img-path"],
         );
-        print(qn.docs[i]["imgpath"]);
+        print(qn.docs[i]["img-path"]);
       }
     });
 
@@ -99,16 +99,19 @@ class _HomeState extends State<Home> {
                 aspectRatio: 3.5,
                 child: CarouselSlider(
                   items: _carouselImage
-                      .map((item) => Container(
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: NetworkImage(item),
-                                  fit: BoxFit.fitWidth))))
+                      .map((item) => Padding(
+                            padding: const EdgeInsets.only(left: 3, right: 3),
+                            child: Container(
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image: NetworkImage(item),
+                                        fit: BoxFit.fitWidth))),
+                          ))
                       .toList(),
                   options: CarouselOptions(
                       autoPlay: false,
                       enlargeCenterPage: true,
-                      viewportFraction: 8.8,
+                      viewportFraction: 0.8,
                       enlargeStrategy: CenterPageEnlargeStrategy.height,
                       onPageChanged: (val, carouselPageChangedReason) {
                         setState(() {
