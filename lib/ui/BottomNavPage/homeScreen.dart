@@ -15,11 +15,13 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   List<String> _carouselImage = [];
+
   var _dotPosition = 0;
   TextEditingController _searchController = TextEditingController();
 
+  List _products = [];
+
   fatchCarouselImage() async {
-    var _firestoreInstance = FirebaseFirestore.instance;
     QuerySnapshot qn =
         await _firestoreInstance.collection("carousel-slider").get();
     setState(() {
@@ -34,8 +36,27 @@ class _HomeState extends State<Home> {
     return qn.docs;
   }
 
+  var _firestoreInstance = FirebaseFirestore.instance;
+
+  fatchProducts() async {
+    QuerySnapshot qn = await _firestoreInstance.collection("products").get();
+    setState(() {
+      for (int i = 0; i < qn.docs.length; i++) {
+        _products.add({
+          "product-name": qn.docs[i]["product-name"],
+          "product-description": qn.docs[i]["product-description"],
+          "product-price": qn.docs[i]["product-price"],
+          "product-img": qn.docs[i]["product-img"],
+        });
+      }
+    });
+
+    return qn.docs;
+  }
+
   void initState() {
     fatchCarouselImage();
+    fatchProducts();
     super.initState();
   }
 
@@ -134,7 +155,33 @@ class _HomeState extends State<Home> {
                   size: Size(6, 6),
                   color: AppColors.deep_orange.withOpacity(0.5),
                 ),
-              )
+              ),
+              SizedBox(
+                height: 15.h,
+              ),
+              Expanded(
+                child: GridView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: _products.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, childAspectRatio: 1),
+                    itemBuilder: (_, index) {
+                      return Card(
+                        elevation: 3,
+                        child: Column(
+                          children: [
+                            AspectRatio(
+                                aspectRatio: 2,
+                                child: Image.network(
+                                    _products[index]["product-img"][0])),
+                            Text("${_products[index]["product-name"]}"),
+                            Text(
+                                "${_products[index]["product-price"].toString()}"),
+                          ],
+                        ),
+                      );
+                    }),
+              ),
             ],
           ),
         ),
