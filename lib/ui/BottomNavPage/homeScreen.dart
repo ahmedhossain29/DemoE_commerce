@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:e_commerce/const/AppColor.dart';
+import 'package:e_commerce/ui/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -93,6 +94,10 @@ class _HomeState extends State<Home> {
                             hintText: "Search Product Here",
                             hintStyle: TextStyle(fontSize: 15.sp),
                           ),
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => SearchScreen())),
                         ),
                       ),
                     ),
@@ -130,7 +135,7 @@ class _HomeState extends State<Home> {
                           ))
                       .toList(),
                   options: CarouselOptions(
-                      autoPlay: false,
+                      autoPlay: true,
                       enlargeCenterPage: true,
                       viewportFraction: 0.8,
                       enlargeStrategy: CenterPageEnlargeStrategy.height,
@@ -173,7 +178,7 @@ class _HomeState extends State<Home> {
                             AspectRatio(
                                 aspectRatio: 2,
                                 child: Image.network(
-                                    _products[index]["product-img"][0])),
+                                    _products[index]["product-img"])),
                             Text("${_products[index]["product-name"]}"),
                             Text(
                                 "${_products[index]["product-price"].toString()}"),
