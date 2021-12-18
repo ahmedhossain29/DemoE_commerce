@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:e_commerce/const/AppColor.dart';
+import 'package:e_commerce/ui/product_details_screen.dart';
 import 'package:e_commerce/ui/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -171,18 +172,25 @@ class _HomeState extends State<Home> {
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2, childAspectRatio: 1),
                     itemBuilder: (_, index) {
-                      return Card(
-                        elevation: 3,
-                        child: Column(
-                          children: [
-                            AspectRatio(
-                                aspectRatio: 2,
-                                child: Image.network(
-                                    _products[index]["product-img"])),
-                            Text("${_products[index]["product-name"]}"),
-                            Text(
-                                "${_products[index]["product-price"].toString()}"),
-                          ],
+                      return GestureDetector(
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) =>
+                                    ProductDetails(_products[index]))),
+                        child: Card(
+                          elevation: 3,
+                          child: Column(
+                            children: [
+                              AspectRatio(
+                                  aspectRatio: 2,
+                                  child: Image.network(
+                                      _products[index]["product-img"])),
+                              Text("${_products[index]["product-name"]}"),
+                              Text(
+                                  "${_products[index]["product-price"].toString()}"),
+                            ],
+                          ),
                         ),
                       );
                     }),
