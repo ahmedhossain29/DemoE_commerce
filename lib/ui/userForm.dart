@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce/const/AppColor.dart';
+import 'package:e_commerce/ui/BottomNavPage/profile.dart';
 import 'package:e_commerce/ui/bottomNavScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +48,7 @@ class _UserFormState extends State<UserForm> {
           "gender": _genderController.text,
         })
         .then((value) => Navigator.push(
-            context, MaterialPageRoute(builder: (_) => BottomNavController())))
+            context, MaterialPageRoute(builder: (_) => profile())))
         .catchError((error) => print("something is wrong. $error"));
   }
 
