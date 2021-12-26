@@ -1,4 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_commerce/const/AppColor.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -12,6 +15,22 @@ class ProductDetails extends StatefulWidget {
 
 class _ProductDetailsState extends State<ProductDetails> {
   @override
+  Future addToCart() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    var currentUser = _auth.currentUser;
+    CollectionReference _collectionRef =
+        FirebaseFirestore.instance.collection("users-cart-items");
+    return _collectionRef
+        .doc(currentUser!.email)
+        .collection("items")
+        .doc()
+        .set({
+      "name": widget._product["product-name"],
+      "price": widget._product["product-price"],
+      "image": widget._product["product-img"],
+    }).then((value) => print("Add to cart"));
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -45,27 +64,16 @@ class _ProductDetailsState extends State<ProductDetails> {
           Text(widget._product['product-description']),
           Text(widget._product['product-price'].toString()),
           SizedBox(
-            height: 150.h,
-            width: ScreenUtil().screenWidth,
-            child: Padding(
-              padding: EdgeInsets.only(left: 20.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  IconButton(
-                    onPressed: null,
-                    icon: Icon(
-                      Icons.light,
-                      color: Colors.transparent,
-                    ),
-                  ),
-                  Text(
-                    "Sign In",
-                    style: TextStyle(fontSize: 22.sp, color: Colors.white),
-                  ),
-                ],
+            width: 1.sw,
+            height: 56.w,
+            child: ElevatedButton(
+              onPressed: () => addToCart(),
+              child: Text(
+                "Add To Cart",
+                style: TextStyle(color: Colors.white, fontSize: 18.sp),
               ),
+              style: ElevatedButton.styleFrom(
+                  primary: AppColors.deep_orange, elevation: 3),
             ),
           ),
         ],
