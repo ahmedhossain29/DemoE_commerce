@@ -33,6 +33,14 @@ class _ProductDetailsState extends State<ProductDetails> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          title: Text("E-Commerce"),
+          leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Icon(Icons.arrow_back))),
       body: SafeArea(
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

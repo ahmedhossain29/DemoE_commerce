@@ -185,7 +185,7 @@ class _HomeState extends State<Home> {
                               AspectRatio(
                                   aspectRatio: 2,
                                   child: Image.network(
-                                      _products[index]["product-img"])),
+                                      _products[index]["product-img"][0])),
                               Text("${_products[index]["product-name"]}"),
                               Text(
                                   "${_products[index]["product-price"].toString()}"),
